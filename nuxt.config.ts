@@ -23,4 +23,10 @@ export default defineNuxtConfig({
 	lucide: {
 		namePrefix: 'Icon',
 	},
+	runtimeConfig: {
+		public: {
+			convexDeployment: process.env.CONVEX_DEPLOYMENT,
+			convexUrl: process.env.CONVEX_URL,
+		},
+	},
 })
