@@ -98,6 +98,7 @@
 
 @layer base {
 	* {
+		font-family: 'Inter';
 		@apply border-border;
 	}
 	body {
