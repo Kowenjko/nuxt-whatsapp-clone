@@ -6,7 +6,7 @@ import { users } from '@/data/db'
 		<DialogTrigger>
 			<p class="text-xs text-muted-foreground text-left">See members</p>
 		</DialogTrigger>
-		<DialogContent>
+		<DialogContent class="!bg-gray-tertiary">
 			<DialogHeader>
 				<DialogTitle class="my-2">Current Members</DialogTitle>
 				<DialogDescription>

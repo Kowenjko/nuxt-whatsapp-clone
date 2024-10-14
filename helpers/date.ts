@@ -8,7 +8,9 @@ export const formatDate = (date_ms: number) => {
 	let date_seconds = date_ms / 1000
 
 	// Convert to Date object
-	let date_obj = new Date(date_seconds * 1000)
+	let date_obj = new Date(date_ms * 1000)
+
+	console.log(date_obj)
 
 	// Get current date and time
 	let current_date = new Date()

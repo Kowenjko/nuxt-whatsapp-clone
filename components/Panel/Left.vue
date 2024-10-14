@@ -46,7 +46,7 @@ import { conversations } from '@/data/db'
 			<template v-else>
 				<p class="text-center text-gray-500 text-sm mt-3">No conversations yet</p>
 				<p class="text-center text-gray-500 text-sm mt-3">
-					We understand {"you're"} an introvert, but {"you've"} got to start somewhere 😊
+					We understand {{ "you're" }} an introvert, but {{ "you've" }} got to start somewhere 😊
 				</p>
 			</template>
 		</div>
