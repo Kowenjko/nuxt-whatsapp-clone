@@ -31,7 +31,7 @@ export const updateUser = internalMutation({
 			throw new ConvexError('User not found')
 		}
 
-		await ctx.db.patch(user._id, {
+		https: await ctx.db.patch(user._id, {
 			image: args.image,
 		})
 	},
@@ -72,14 +72,14 @@ export const setUserOffline = internalMutation({
 export const getUsers = query({
 	args: {},
 	handler: async (ctx, args) => {
-		// const identity = await ctx.auth.getUserIdentity()
+		const identity = await ctx.auth.getUserIdentity()
+
 		// if (!identity) {
 		// 	throw new ConvexError('Unauthorized')
 		// }
-
-		// const users = await ctx.db.query('users').collect()
+		const users = await ctx.db.query('users').collect()
 		// return users.filter((user) => user.tokenIdentifier !== identity.tokenIdentifier)
-		return await ctx.db.query('users').collect()
+		return users
 	},
 })
 

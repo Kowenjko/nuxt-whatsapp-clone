@@ -60,6 +60,7 @@ module.exports = {
 				'green-primary': 'hsl(var(--green-primary))',
 				'green-secondary': 'hsl(var(--green-secondary))',
 				'green-chat': 'hsl(var(--green-chat))',
+				loader: 'hsl(var(--loader))',
 			},
 			backgroundImage: {
 				'chat-tile-light': "url('/bg-light.png')",

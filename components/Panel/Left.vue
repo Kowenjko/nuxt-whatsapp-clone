@@ -6,8 +6,7 @@ import { conversations } from '@/data/db'
 		<div class="sticky top-0 bg-left-panel z-10">
 			<!-- Header -->
 			<div class="flex justify-between bg-gray-primary p-3 items-center">
-				<!-- <UserButton /> -->
-				<IconUser size="20" />
+				<UserButton afterSignOutUrl="/sign-in" />
 
 				<div class="flex items-center gap-3">
 					<!-- {isAuthenticated && <UserListDialog />} -->
