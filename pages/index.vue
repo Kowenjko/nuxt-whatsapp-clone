@@ -2,16 +2,21 @@
 import { useConvexQuery } from '@convex-vue/core'
 import { api } from '@/convex/_generated/api'
 
-const { data, isLoading } = await useConvexQuery(api.users.getUsers, {})
-
-console.log(data.value)
 const loading = ref(true)
+
+const { tokenIdentifier } = useUseGetTokenIdentifier()
+
+const { data, isLoading } = useConvexQuery(api.users.getUsers, {
+	tokenIdentifier,
+})
 
 definePageMeta({
 	middleware: 'auth',
 	auth: { guestRedirectUrl: '/sign-in' },
 })
-onMounted(() => (loading.value = false))
+onMounted(() => {
+	loading.value = false
+})
 </script>
 
 <template>

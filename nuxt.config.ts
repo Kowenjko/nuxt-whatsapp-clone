@@ -31,6 +31,7 @@ export default defineNuxtConfig({
 			clerkPublishableKey: process.env.NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 			convexDeployment: process.env.CONVEX_DEPLOYMENT,
 			convexUrl: process.env.CONVEX_URL,
+			clerkAppDomain: process.env.NUXT_CLERK_APP_DOMAIN,
 		},
 		clerkSecretKey: process.env.NUXT_CLERK_SECRET_KEY,
 	},

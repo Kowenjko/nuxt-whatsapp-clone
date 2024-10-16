@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { conversations } from '@/data/db'
+
+const { isSignedIn } = useAuth()
 </script>
 <template>
 	<div class="w-1/4 border-gray-600 border-r">
@@ -9,10 +11,8 @@ import { conversations } from '@/data/db'
 				<UserButton afterSignOutUrl="/sign-in" />
 
 				<div class="flex items-center gap-3">
-					<!-- {isAuthenticated && <UserListDialog />} -->
-					<IconMessageSquareDiff size="20" />
+					<UserListDialog v-if="isSignedIn" />
 					<ThemeSwitch />
-					<IconLogOut size="20" class="cursor-pointer" />
 				</div>
 			</div>
 			<div class="p-3 flex items-center">
@@ -20,7 +20,7 @@ import { conversations } from '@/data/db'
 				<div class="relative h-10 mx-3 flex-1">
 					<IconSearch
 						class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 z-10"
-						size="18"
+						:size="18"
 					/>
 					<Input
 						type="text"

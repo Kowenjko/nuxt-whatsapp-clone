@@ -27,10 +27,10 @@ const conversationName = 'John Doe'
 
 				<div class="flex items-center gap-7 mr-5">
 					<nuxt-link to="/video-call" target="_blank">
-						<IconVideo size="23" />
+						<IconVideo :size="23" />
 					</nuxt-link>
 					<button @click="selectedConversation = null" type="button"></button>
-					<IconX size="16" class="cursor-pointer" />
+					<IconX :size="16" class="cursor-pointer" />
 				</div>
 			</div>
 		</div>

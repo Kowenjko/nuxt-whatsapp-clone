@@ -6,7 +6,7 @@ import { users } from '@/data/db'
 		<DialogTrigger>
 			<p class="text-xs text-muted-foreground text-left">See members</p>
 		</DialogTrigger>
-		<DialogContent class="!bg-gray-tertiary">
+		<DialogContent class="!bg-left-panel">
 			<DialogHeader>
 				<DialogTitle class="my-2">Current Members</DialogTitle>
 				<DialogDescription>
@@ -27,7 +27,7 @@ import { users } from '@/data/db'
 							<div class="w-full">
 								<div class="flex items-center gap-2">
 									<h3 class="text-md font-medium">{{ user.name || user.email.split('@')[0] }}</h3>
-									<IconCrown v-if="user.admin" size="16" class="text-yellow-400" />
+									<IconCrown v-if="user.admin" :size="16" class="text-yellow-400" />
 								</div>
 							</div>
 						</div>
