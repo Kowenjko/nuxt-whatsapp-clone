@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-definePageMeta({ layout: 'auth' })
+definePageMeta({ layout: 'auth', middleware: 'guest', auth: { authenticatedRedirectUrl: '/' } })
 </script>
 
 <template>
