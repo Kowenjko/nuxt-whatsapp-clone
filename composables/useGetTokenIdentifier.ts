@@ -1,4 +1,4 @@
-export const useUseGetTokenIdentifier = () => {
+export const useGetTokenIdentifier = () => {
 	const { clerkAppDomain } = useRuntimeConfig().public
 	const { userId } = useAuth()
 

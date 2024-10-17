@@ -1,14 +1,62 @@
 <script lang="ts" setup>
-import { users } from '@/data/db'
+import type { Id } from '~/convex/_generated/dataModel'
 
 const selectedUsers = ref<string[]>([])
 const groupName = ref('')
 const isLoading = ref(false)
-const selectedImage = ref(null)
-const renderedImage = ref('')
+const isOpen = ref(false)
 
-// const dialogCloseRef = useTemplateRef('dialogClose')
-const imgRef = useTemplateRef('img')
+const { $toast } = useNuxtApp()
+
+const { me, users } = useGetDataInConvex()
+const { generateUploadUrl, createConversation } = useMutationInConvex()
+const { selectedImage, renderedImage, openSelectImage } = useUploadImage()
+
+const handleCreateConversation = async () => {
+	if (selectedUsers.value.length === 0) return
+	isLoading.value = true
+	try {
+		const isGroup = selectedUsers.value.length > 1
+
+		let conversationId
+		if (!isGroup) {
+			conversationId = await createConversation({
+				participants: [...selectedUsers.value, me.value._id!] as Id<'users'>[],
+				isGroup: false,
+			})
+		} else {
+			const postUrl = await generateUploadUrl({})
+
+			const result = await $fetch(postUrl!, {
+				method: 'POST',
+				headers: { 'Content-Type': selectedImage.value?.type! },
+				body: selectedImage.value,
+			})
+
+			//@ts-ignore
+			if (result?.storageId) {
+				conversationId = await createConversation({
+					participants: [...selectedUsers.value, me.value?._id!] as Id<'users'>[],
+					isGroup: true,
+					admin: me.value?._id!,
+					groupName: groupName.value,
+					// @ts-ignore
+					groupImage: result?.storageId || '',
+				})
+			}
+			// TODO => Update a global state called "selectedConversation"
+		}
+		isOpen.value = false
+		selectedUsers.value = []
+		groupName.value = ''
+		selectedImage.value = null
+	} catch (error) {
+		$toast.error('Failed to create conversation')
+		console.log(error)
+	} finally {
+		isLoading.value = false
+	}
+}
 
 const selectUser = (userId: string) => {
 	if (selectedUsers.value.includes(userId)) {
@@ -19,13 +67,13 @@ const selectUser = (userId: string) => {
 }
 </script>
 <template>
-	<Dialog>
+	<Dialog v-model:open="isOpen">
 		<DialogTrigger>
-			<IconMessageSquareDiff :size="20" />
+			<IconMessageSquareDiff :size="20" @click.stop="isOpen = true" />
 		</DialogTrigger>
 		<DialogContent class="!bg-left-panel">
 			<DialogHeader>
-				<!-- <DialogClose /> -->
+				<DialogClose />
 				<DialogTitle>USERS</DialogTitle>
 			</DialogHeader>
 
@@ -36,15 +84,19 @@ const selectUser = (userId: string) => {
 					:src="renderedImage"
 					fill
 					alt="user image"
-					class="rounded-full object-cover"
+					class="rounded-full object-cover w-16 h-16"
 					width="64"
 					height="64"
 				/>
 			</div>
 
 			<template v-if="selectedUsers.length > 1">
-				<input placeholder="Group Name" ref="img" />
-				<Button class="flex gap-2">
+				<Input
+					placeholder="Group Name"
+					v-model="groupName"
+					class="py-2 text-sm w-full rounded-lg shadow-sm !bg-gray-tertiary focus-visible:ring-transparent"
+				/>
+				<Button class="flex gap-2" @click="openSelectImage">
 					<IconImage :size="20" />
 					Group Image
 				</Button>
@@ -78,14 +130,13 @@ const selectUser = (userId: string) => {
 				</div>
 			</div>
 			<div class="flex justify-between">
-				<Button variant="outline">Cancel</Button>
+				<Button @click="isOpen = false" variant="outline">Cancel</Button>
 				<Button
+					@click="handleCreateConversation"
 					:disabled="
 						selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading
 					"
 				>
-					<!-- spinner -->
-
 					<div v-if="isLoading" class="w-5 h-5 border-t-2 border-b-2 rounded-full animate-spin" />
 					<span v-else>Create</span>
 				</Button>

@@ -6900,6 +6900,11 @@ vue-router@^4.2.5, vue-router@^4.4.5, vue-router@latest:
   dependencies:
     "@vue/devtools-api" "^6.6.4"
 
+vue3-toastify@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/vue3-toastify/-/vue3-toastify-0.2.3.tgz#7f482d89c73d38839d8c60072091443b9a496501"
+  integrity sha512-Gsv/wWFYsAzhXFE+JCoL7KAUYvzl9AaGPykkDtT073RWiz1vqtdDFcHENU26ga0tbY42Q51yJr4en/ymQD0OGg==
+
 vue@^3.3.11, vue@^3.5.5, vue@latest:
   version "3.5.12"
   resolved "https://registry.npmjs.org/vue/-/vue-3.5.12.tgz"
