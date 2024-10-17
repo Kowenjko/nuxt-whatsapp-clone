@@ -20,7 +20,7 @@ const colorMode = useColorMode()
 		<DropdownMenuContent align="end" class="bg-gray-primary">
 			<DropdownMenuItem @click="colorMode = 'light'"> Light </DropdownMenuItem>
 			<DropdownMenuItem @click="colorMode = 'dark'"> Dark </DropdownMenuItem>
-			<DropdownMenuItem @click="colorMode = 'system'"> System </DropdownMenuItem>
+			<DropdownMenuItem @click="colorMode = 'auto'"> System </DropdownMenuItem>
 		</DropdownMenuContent>
 	</DropdownMenu>
 </template>
