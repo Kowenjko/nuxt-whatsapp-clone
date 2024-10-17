@@ -111,6 +111,7 @@ export const getGroupMembers = query({
 			.query('conversations')
 			.filter((q) => q.eq(q.field('_id'), args.conversationId))
 			.first()
+
 		if (!conversation) {
 			throw new ConvexError('Conversation not found')
 		}

@@ -12,10 +12,14 @@ export default defineNuxtConfig({
 		'@nuxt/fonts',
 		'nuxt-lucide-icons',
 		'vue-clerk/nuxt',
+		'@pinia/nuxt',
 	],
 	shadcn: {
 		prefix: '',
 		componentDir: './components/ui',
+	},
+	pinia: {
+		storesDirs: ['./stores/**'],
 	},
 	fonts: {
 		families: [{ name: 'Inter', provider: 'google' }],

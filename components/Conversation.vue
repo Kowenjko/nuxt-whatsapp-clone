@@ -11,14 +11,15 @@ const lastMessage = computed(() => conversation.lastMessage)
 const lastMessageType = computed(() => lastMessage.value?.messageType)
 
 const { me } = useGetDataInConvex()
+const chatsStore = useChatsStore()
 
-const activeBgClass = false
+const activeBgClass = computed(() => conversation?._id === chatsStore.selectedConversation?._id)
 </script>
 <template>
 	<div
 		class="flex gap-2 items-center p-3 hover:bg-chat-hover cursor-pointer"
 		:class="{ 'bg-gray-tertiary': activeBgClass }"
-		@click=""
+		@click="chatsStore.setSelectedConversation(conversation)"
 	>
 		<Avatar class="border border-gray-900 overflow-visible relative">
 			<div

@@ -10,8 +10,6 @@ export const formatDate = (date_ms: number) => {
 	// Convert to Date object
 	let date_obj = new Date(date_ms * 1000)
 
-	console.log(date_obj)
-
 	// Get current date and time
 	let current_date = new Date()
 	current_date.setHours(0, 0, 0, 0) // Set hours, minutes, seconds, and milliseconds to 0
