@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { conversations } from '@/data/db'
-
 const { isSignedIn } = useAuth()
+const { conversations } = useGetDataInConvex()
 </script>
 <template>
 	<div class="w-1/4 border-gray-600 border-r">

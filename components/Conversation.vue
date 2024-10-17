@@ -8,9 +8,10 @@ const conversationName = computed(
 	() => conversation?.groupName || conversation?.name || 'Private Chat'
 )
 const lastMessage = computed(() => conversation.lastMessage)
-const lastMessageType = computed(() => conversation.lastMessage.messageType)
+const lastMessageType = computed(() => lastMessage.value?.messageType)
 
-const authUser = { _id: 'user1' }
+const { me } = useGetDataInConvex()
+
 const activeBgClass = false
 </script>
 <template>
@@ -41,9 +42,9 @@ const activeBgClass = false
 				</span>
 			</div>
 			<p class="text-[12px] mt-1 text-gray-500 flex items-center gap-1">
-				<MessageSeenSvg v-if="lastMessage?.sender === authUser?._id" />
+				<MessageSeenSvg v-if="lastMessage?.sender === me?._id" />
 
-				<IconUsers v-if="conversation.isGroup" size="16" />
+				<IconUsers v-if="conversation.isGroup" :size="16" />
 
 				<span v-if="!lastMessage">Say Hi!</span>
 				<template v-if="lastMessageType === 'text'">
@@ -52,8 +53,8 @@ const activeBgClass = false
 					</span>
 					<span v-else>{{ lastMessage?.content }} </span>
 				</template>
-				<IconImage v-if="lastMessageType === 'image'" size="16" />
-				<IconVideo v-if="lastMessageType === 'video'" size="16" />
+				<IconImage v-if="lastMessageType === 'image'" :size="16" />
+				<IconVideo v-if="lastMessageType === 'video'" :size="16" />
 			</p>
 		</div>
 	</div>

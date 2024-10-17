@@ -6,6 +6,9 @@ export const useGetDataInConvex = () => {
 
 	const { data: me } = useConvexQuery(api.users.getMe, { tokenIdentifier })
 	const { data: users } = useConvexQuery(api.users.getUsers, { tokenIdentifier })
+	const { data: conversations } = useConvexQuery(api.conversations.getMyConversations, {
+		tokenIdentifier,
+	})
 
-	return { me, users }
+	return { me, users, conversations }
 }
