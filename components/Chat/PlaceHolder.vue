@@ -15,7 +15,7 @@
 		<p
 			class="w-1/2 mt-auto text-center text-gray-primary text-xs text-muted-foreground flex items-center justify-center gap-1"
 		>
-			<IconLock size="10" /> Your personal messages are end-to-end encrypted
+			<IconLock :size="10" /> Your personal messages are end-to-end encrypted
 		</p>
 	</div>
 </template>
