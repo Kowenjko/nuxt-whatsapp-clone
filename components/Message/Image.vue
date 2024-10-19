@@ -9,10 +9,9 @@ const handleClick = () => emit('handleClick')
 </script>
 
 <template>
-	<div class="w-[250px] h-[250px] m-2 relative">
+	<div class="w-[250px] h-[250px] m-2 relative flex justify-center items-center">
 		<NuxtImg
 			:src="content"
-			fill
 			class="cursor-pointer object-cover rounded"
 			alt="image"
 			@click="handleClick"

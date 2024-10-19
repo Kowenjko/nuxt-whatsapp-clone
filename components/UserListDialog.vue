@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Id } from '~/convex/_generated/dataModel'
+import type { Conversation } from '@/types'
 
 const selectedUsers = ref<string[]>([])
 const groupName = ref('')
@@ -10,7 +11,8 @@ const { $toast } = useNuxtApp()
 
 const { me, users } = useGetDataInConvex()
 const { generateUploadUrl, createConversation } = useMutationInConvex()
-const { selectedImage, renderedImage, openSelectImage } = useUploadImage()
+const { selectedFiles, renderedFiles, openSelectFiles, resetSelectFiles } = useUploadFiles()
+const chatsStore = useChatsStore()
 
 const handleCreateConversation = async () => {
 	if (selectedUsers.value.length === 0) return
@@ -29,8 +31,8 @@ const handleCreateConversation = async () => {
 
 			const result = await $fetch(postUrl!, {
 				method: 'POST',
-				headers: { 'Content-Type': selectedImage.value?.type! },
-				body: selectedImage.value,
+				headers: { 'Content-Type': selectedFiles.value?.type! },
+				body: selectedFiles.value,
 			})
 
 			//@ts-ignore
@@ -45,11 +47,26 @@ const handleCreateConversation = async () => {
 				})
 			}
 			// TODO => Update a global state called "selectedConversation"
+			const conversationName = isGroup
+				? groupName.value
+				: users.value?.find((user) => user._id === selectedUsers.value[0])?.name
+			const conversationImage = isGroup
+				? renderedFiles
+				: users.value?.find((user) => user._id === selectedUsers.value[0])?.image
+
+			chatsStore.setSelectedConversation({
+				_id: conversationId as Conversation['_id'],
+				participants: selectedUsers.value as Conversation['participants'],
+				isGroup,
+				image: conversationImage as string,
+				name: conversationName,
+				admin: me.value?._id!,
+			})
 		}
 		isOpen.value = false
 		selectedUsers.value = []
 		groupName.value = ''
-		selectedImage.value = null
+		resetSelectFiles()
 	} catch (error) {
 		$toast.error('Failed to create conversation')
 		console.log(error)
@@ -79,9 +96,9 @@ const selectUser = (userId: string) => {
 
 			<DialogDescription>Start a new chat</DialogDescription>
 
-			<div v-if="renderedImage" class="w-16 h-16 relative mx-auto">
+			<div v-if="renderedFiles" class="w-16 h-16 relative mx-auto">
 				<NuxtImg
-					:src="renderedImage"
+					:src="renderedFiles"
 					fill
 					alt="user image"
 					class="rounded-full object-cover w-16 h-16"
@@ -96,7 +113,7 @@ const selectUser = (userId: string) => {
 					v-model="groupName"
 					class="py-2 text-sm w-full rounded-lg shadow-sm !bg-gray-tertiary focus-visible:ring-transparent"
 				/>
-				<Button class="flex gap-2" @click="openSelectImage">
+				<Button class="flex gap-2" @click="openSelectFiles">
 					<IconImage :size="20" />
 					Group Image
 				</Button>

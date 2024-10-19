@@ -7,6 +7,8 @@ export const useMutationInConvex = () => {
 	const { mutate: kickUser } = useConvexMutation(api.conversations.kickUser)
 
 	const { mutate: sendTextMessage } = useConvexMutation(api.messages.sendTextMessage)
+	const { mutate: sendImage } = useConvexMutation(api.messages.sendImage)
+	const { mutate: sendVideo } = useConvexMutation(api.messages.sendVideo)
 
-	return { generateUploadUrl, createConversation, sendTextMessage, kickUser }
+	return { generateUploadUrl, createConversation, sendTextMessage, kickUser, sendVideo, sendImage }
 }

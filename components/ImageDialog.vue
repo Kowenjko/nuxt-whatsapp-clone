@@ -6,7 +6,7 @@ const open = defineModel('open')
 
 <template>
 	<Dialog v-model:open="open">
-		<DialogContent class="min-w-[750px]">
+		<DialogContent class="min-w-[750px] dark:bg-left-panel">
 			<DialogDescription class="relative h-[450px] flex justify-center">
 				<NuxtImg :src="src" fill class="rounded-lg object-contain" alt="image" />
 			</DialogDescription>

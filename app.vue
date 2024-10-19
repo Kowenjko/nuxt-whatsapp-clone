@@ -4,6 +4,7 @@ useHead({
 		return titleChunk ? `WhatsApp Clone | ${titleChunk}` : 'WhatsApp Clone'
 	},
 	meta: {
+		// @ts-ignore
 		name: 'description',
 		content: 'A workspace for your team, powered by Stream Chat and Clerk.',
 	},

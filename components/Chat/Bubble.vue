@@ -32,7 +32,7 @@ const bgClass = computed(() =>
 		<div class="flex gap-1 w-2/3">
 			<ChatBubbleAvatar v-if="!isGroup && !fromAI" :isMember="isMember" :message="message" />
 			<div
-				:class="`flex flex-col z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative   ${bgClass}`"
+				:class="`flex flex-col z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative ${bgClass}`"
 			>
 				<MessageOtherIndicator v-if="!fromAI" />
 				<IconBot v-if="fromAI" :size="16" class="absolute bottom-[2px] left-2" />

@@ -31,7 +31,7 @@ const onSelectEmoji = (emoji: any) => (msgText.value += emoji)
 		<div class="relative flex gap-2 ml-2">
 			<!-- EMOJI PICKER WILL GO HERE -->
 			<EmojiPicker @select-emoji="onSelectEmoji" />
-			<IconPlus class="text-gray-600 dark:text-gray-400" />
+			<MediaDropdown />
 		</div>
 
 		<form class="w-full flex gap-3" @submit.prevent="handleSendMessage">
