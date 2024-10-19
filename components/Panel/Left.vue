@@ -1,6 +1,19 @@
 <script lang="ts" setup>
 const { isSignedIn } = useAuth()
 const { conversations } = useGetDataInConvex()
+const chatsStore = useChatsStore()
+
+watch([conversations, () => chatsStore.selectedConversation], () => {
+	const conversationIds = conversations.value?.map((conversation) => conversation._id)
+
+	if (
+		chatsStore.selectedConversation &&
+		conversationIds &&
+		!conversationIds.includes(chatsStore.selectedConversation._id)
+	) {
+		chatsStore.setSelectedConversation(null)
+	}
+})
 </script>
 <template>
 	<div class="w-1/4 border-gray-600 border-r">
