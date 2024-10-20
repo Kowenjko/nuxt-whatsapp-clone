@@ -19,7 +19,7 @@ export const chat = action({
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				model: 'meta-llama/Llama-3-8b-chat-hf',
+				model: 'meta-llama/Llama-Vision-Free',
 				messages: [
 					{
 						// Provide a 'system' message giving context about how to respond

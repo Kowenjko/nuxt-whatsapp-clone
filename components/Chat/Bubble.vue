@@ -29,7 +29,7 @@ const bgClass = computed(() =>
 <template>
 	<template v-if="!fromMe">
 		<DateIndicator :message="message" :previousMessage="previousMessage" />
-		<div class="flex gap-1 w-2/3">
+		<div class="flex gap-1 w-2/3 last:mb-4">
 			<ChatBubbleAvatar v-if="!isGroup || !fromAI" :isMember="isMember" :message="message" />
 			<div
 				:class="`flex flex-col z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative ${bgClass}`"
@@ -46,7 +46,7 @@ const bgClass = computed(() =>
 	<template v-else>
 		<DateIndicator :message="message" :previousMessage="previousMessage" />
 
-		<div class="flex gap-1 w-2/3 ml-auto">
+		<div class="flex gap-1 w-2/3 ml-auto last:mb-4">
 			<div
 				:class="`flex  z-20 max-w-fit px-2 pt-1 rounded-md shadow-md ml-auto relative ${bgClass}`"
 			>
