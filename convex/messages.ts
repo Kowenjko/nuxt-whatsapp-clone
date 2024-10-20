@@ -42,20 +42,20 @@ export const sendTextMessage = mutation({
 		})
 
 		// TODO => add @gpt check later
-		// if (args.content.startsWith('@gpt')) {
-		// 	// Schedule the chat action to run immediately
-		// 	await ctx.scheduler.runAfter(0, api.openai.chat, {
-		// 		messageBody: args.content,
-		// 		conversation: args.conversation,
-		// 	})
-		// }
+		if (args.content.startsWith('@gpt')) {
+			// Schedule the chat action to run immediately
+			await ctx.scheduler.runAfter(0, api.togetherai.chat, {
+				messageBody: args.content,
+				conversation: args.conversation,
+			})
+		}
 
-		// if (args.content.startsWith('@dall-e')) {
-		// 	await ctx.scheduler.runAfter(0, api.openai.dall_e, {
-		// 		messageBody: args.content,
-		// 		conversation: args.conversation,
-		// 	})
-		// }
+		if (args.content.startsWith('@dall-e')) {
+			await ctx.scheduler.runAfter(0, api.togetherai.dall_e, {
+				messageBody: args.content,
+				conversation: args.conversation,
+			})
+		}
 	},
 })
 
@@ -66,6 +66,7 @@ export const sendChatGPTMessage = mutation({
 		messageType: v.union(v.literal('text'), v.literal('image')),
 	},
 	handler: async (ctx, args) => {
+		console.log('ChatGPT')
 		await ctx.db.insert('messages', {
 			content: args.content,
 			sender: 'ChatGPT',

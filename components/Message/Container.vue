@@ -1,10 +1,29 @@
 <script lang="ts" setup>
 import { api } from '@/convex/_generated/api'
-import { ConvexQuery } from '@convex-vue/core'
+import { ConvexQuery, useConvexQuery } from '@convex-vue/core'
 
 const { tokenIdentifier } = useGetTokenIdentifier()
 const chatsStore = useChatsStore()
 const { me } = useGetDataInConvex()
+
+const lastMessageRef = useTemplateRef('lastMessage')
+
+const { data: getMessages } = useConvexQuery(api.messages.getMessages, {
+	tokenIdentifier,
+	conversation: chatsStore.selectedConversation!._id,
+})
+
+const scrollToLastMessage = () => {
+	setTimeout(() => {
+		if (lastMessageRef.value && Array.isArray(lastMessageRef.value)) {
+			console.log(lastMessageRef.value)
+			// @ts-ignore
+			lastMessageRef.value?.at(-1)?.scrollIntoView({ behavior: 'smooth' })
+		}
+	}, 100)
+}
+
+watch([getMessages, () => chatsStore.selectedConversation], scrollToLastMessage)
 </script>
 <template>
 	<div class="relative p-3 flex-1 overflow-auto h-full bg-chat-tile-light dark:bg-chat-tile-dark">

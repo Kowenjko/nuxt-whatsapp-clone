@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { IMessage } from '@/types'
 
-defineProps<{ content: IMessage['content'] }>()
+const { content } = defineProps<{ content: IMessage['content'] }>()
 
 const emit = defineEmits<{ handleClick: [] }>()
 
@@ -10,7 +10,7 @@ const handleClick = () => emit('handleClick')
 
 <template>
 	<div class="w-[250px] h-[250px] m-2 relative flex justify-center items-center">
-		<NuxtImg
+		<img
 			:src="content"
 			class="cursor-pointer object-cover rounded"
 			alt="image"
