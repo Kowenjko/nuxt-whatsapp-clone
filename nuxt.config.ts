@@ -39,6 +39,8 @@ export default defineNuxtConfig({
 			convexUrl: process.env.CONVEX_URL,
 			clerkAppDomain: process.env.NUXT_CLERK_APP_DOMAIN,
 			openAiApiKey: process.env.OPENAI_API_KEY,
+			zegoAppId: process.env.NUXT_PUBLIC_ZEGO_APP_ID,
+			zegoServerSecret: process.env.NUXT_PUBLIC_ZEGO_SERVER_SECRET,
 		},
 		clerkSecretKey: process.env.NUXT_CLERK_SECRET_KEY,
 	},

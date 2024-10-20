@@ -2091,6 +2091,11 @@
   dependencies:
     vue-demi ">=0.14.10"
 
+"@zegocloud/zego-uikit-prebuilt@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@zegocloud/zego-uikit-prebuilt/-/zego-uikit-prebuilt-2.11.0.tgz#6baf58d1c6a82da87c148cc094dbc3f9eed487c4"
+  integrity sha512-lsk7hOEGl3fjqrly2ZAdOP8dktNMJvnF8iVEMzHZJ2SSxb6J2LA/4MwhDMhpSczU3V4Kw7+PjPl8A64XE04U4w==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz"

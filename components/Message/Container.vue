@@ -16,7 +16,6 @@ const { data: getMessages } = useConvexQuery(api.messages.getMessages, {
 const scrollToLastMessage = () => {
 	setTimeout(() => {
 		if (lastMessageRef.value && Array.isArray(lastMessageRef.value)) {
-			console.log(lastMessageRef.value)
 			// @ts-ignore
 			lastMessageRef.value?.at(-1)?.scrollIntoView({ behavior: 'smooth' })
 		}
