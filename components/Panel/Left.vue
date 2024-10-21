@@ -1,9 +1,33 @@
 <script lang="ts" setup>
+const searchText = ref('')
+const selectTypeSorted = ref<'a-z' | 'z-a'>('a-z')
+
 const { isSignedIn } = useAuth()
 const { conversations } = useGetDataInConvex()
 const chatsStore = useChatsStore()
 
-watch([conversations, () => chatsStore.selectedConversation], () => {
+const searchConversations = computed(() => {
+	if (searchText.value)
+		return conversations.value.filter((conversation: any) => {
+			const conversationName = conversation?.groupName || conversation?.name || 'Private Chat'
+			return conversationName.toLocaleLowerCase().includes(searchText.value.toLocaleLowerCase())
+		})
+	return conversations.value
+})
+
+const sortedConversations = computed(() => {
+	if (selectTypeSorted.value === 'a-z') {
+		return searchConversations.value?.sort((a: any, b: any) =>
+			(a?.groupName || a?.name)?.localeCompare(b?.groupName || b?.name)
+		)
+	}
+
+	return searchConversations.value?.sort((a: any, b: any) =>
+		(b?.groupName || b?.name)?.localeCompare(a?.groupName || a?.name)
+	)
+})
+
+watch([searchConversations, () => chatsStore.selectedConversation], () => {
 	const conversationIds = conversations.value?.map((conversation) => conversation._id)
 
 	if (
@@ -38,17 +62,19 @@ watch([conversations, () => chatsStore.selectedConversation], () => {
 						type="text"
 						placeholder="Search or start a new chat"
 						class="pl-10 py-2 text-sm w-full !rounded !shadow-sm !bg-gray-primary !focus-visible:ring-transparent"
+						v-model="searchText"
 					/>
 				</div>
-				<IconListFilter class="cursor-pointer" />
+
+				<FilterDialog @sorted="selectTypeSorted = $event" />
 			</div>
 		</div>
 
 		<!-- Chat List -->
 		<div class="my-3 flex flex-col gap-0 max-h-[80%] overflow-auto">
-			<template v-if="conversations && conversations.length > 0">
+			<template v-if="sortedConversations && sortedConversations.length > 0">
 				<Conversation
-					v-for="conversation in conversations"
+					v-for="conversation in sortedConversations"
 					:key="conversation._id"
 					:conversation="conversation"
 				/>
