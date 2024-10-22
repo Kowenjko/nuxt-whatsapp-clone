@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const colorMode = useColorMode()
+</script>
 
 <template>
 	<main class="m-5">

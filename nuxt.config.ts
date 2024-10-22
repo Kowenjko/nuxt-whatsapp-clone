@@ -26,11 +26,18 @@ export default defineNuxtConfig({
 		families: [{ name: 'Inter', provider: 'google' }],
 	},
 	clerk: {
-		appearance: {},
+		appearance: {
+			layout: { logoImageUrl: '/whatsapp.png', socialButtonsVariant: 'iconButton' },
+			variables: {
+				colorText: '#ffffff',
+				colorPrimary: '#0E78F9',
+				colorBackground: '#111B22',
+				colorInputBackground: '#222E35',
+				colorInputText: '#ffffff',
+			},
+		},
 	},
-	lucide: {
-		namePrefix: 'Icon',
-	},
+	lucide: { namePrefix: 'Icon' },
 
 	runtimeConfig: {
 		public: {
