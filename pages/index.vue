@@ -5,6 +5,9 @@ definePageMeta({
 	middleware: 'auth',
 	auth: { guestRedirectUrl: '/sign-in' },
 })
+const test = ()=>{
+  if(loading.value===false)
+  {return}}
 onMounted(() => (loading.value = false))
 </script>
 
